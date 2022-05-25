@@ -1,0 +1,41 @@
+<configuration debug="true">
+
+	<!-- FECHA -->
+	<timestamp key="logDateVar" datePattern="dd-MM-yyyy" />
+	
+	<!-- APPENDER -->
+	<appender name="T1"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		
+		<!-- NOMBRE DEL FICHERO-->
+		<file>C:/Users/Alba/Desktop/Desarrollo/WORKSPACES/BACKEND/nttdata.java.t1-${logDateVar}.log</file>
+		<append>false</append>
+		
+		<!-- POLÍTICA GESTION FICHERO -->
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<fileNamePattern>C:/Users/Alba/Desktop/Desarrollo/WORKSPACES/BACKEND/nttdata.java.t1-${logDateVar}.%i.logDual.zip</fileNamePattern>
+			
+			<!-- DIVISIONES DEL FICHERO -->
+			<minIndex>1</minIndex>
+			<maxIndex>7</maxIndex>
+		</rollingPolicy>
+
+		<!-- LIMITE FICHERO -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<maxFileSize>20KB</maxFileSize>
+		</triggeringPolicy>
+		
+		<!-- FORMA PRESENTACIÓN INFORMACIÓN DEL FICHERO -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - [%method] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- CONFIGURACION LOGGER ROOT (CONFIGURADO AL NIVEL INFO SALE POR TUBERIA...)-->
+	<root level="debug">
+		<appender-ref ref="T1" />
+	</root>
+
+</configuration>
